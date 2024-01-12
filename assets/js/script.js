@@ -18,7 +18,7 @@ function getCurrentForcast(lattitude, longitude) {
         var icon = document.createElement('img');
         icon.setAttribute('src', 'https://openweathermap.org/img/wn/' + data.weather[0].icon +'@2x.png');
         var temp = document.createElement('p');
-        temp.textContent = 'Temperature: ' + data.main.temp + ' F';
+        temp.textContent = 'Temperature: ' + Math.floor((data.main.temp -273.15) * 1.8 + 32)  + ' F';
         var wind = document.createElement('p');
         wind.textContent = 'Wind: ' + data.wind.speed + ' MPH';
         var humidity = document.createElement('p');
@@ -59,8 +59,6 @@ function getLatNLon(cityName) {
         lat = data[0].lat;
         lon = data[0].lon;
         console.log(data);
-        console.log(data[0].lat);
-        console.log(data[0].lon);
         console.log(lat);
         console.log(lon);
         getCurrentForcast(lat,lon);
