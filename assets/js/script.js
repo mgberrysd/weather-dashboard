@@ -16,7 +16,7 @@ function getCurrentForcast(lattitude, longitude) {
         .then(function (data) {
             console.log(data)
             var name = document.createElement('h2');
-            name.textContent = data.name;
+            name.textContent = data.name + ' (' + dayjs().format('dddd MM/DD/YYYY') + ')';
             var icon = document.createElement('img');
             icon.setAttribute('src', 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png');
             var temp = document.createElement('p');
@@ -47,10 +47,9 @@ function getExtendedForcast(lattitude, longitude) {
             console.log(data)
             console.log(data.list[0].main)
             for (var i = 0; i < data.list.length; i++) {
-                console.log(data.list[i].dt_txt.substring(11,13));
                 if (data.list[i].dt_txt.substring(11,13) == 12) {
                     var date = document.createElement('h2');
-                    date.textContent = data.list[i].dt_txt;
+                    date.textContent = dayjs(data.list[i].dt_txt.substring(0,10)).format('dddd MM/DD/YYYY');
                     var icon = document.createElement('img');
                     icon.setAttribute('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon.replace("n", "d") + '@2x.png');
                     var temp = document.createElement('p');
