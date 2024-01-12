@@ -4,6 +4,9 @@ var city = 'San Diego';
 var currentDayDiv = document.querySelector('.current');
 var extendedForcastDiv = document.querySelectorAll('.extended');
 var cardCount = 0;
+var searchInput = document.querySelector('#citySearchField');
+var submitEl = document.querySelector('.btn');
+var searchedCities = document.querySelector('.searchedCities')
 
 // API call for current weather data based on lat and lon
 
@@ -64,6 +67,9 @@ function getExtendedForcast(lattitude, longitude) {
                     extendedForcastDiv[cardCount].append(wind);
                     extendedForcastDiv[cardCount].append(humidity);
                     cardCount++;
+                    if (cardCount === 5) {
+                        cardCount = 0;
+                    }
                 }
             }
         });
@@ -88,4 +94,22 @@ function getLatNLon(cityName) {
         });
 };
 
+
+function handleSearchFormSubmit(event) {
+    event.preventDefault();
+  
+    var searchInputVal = searchInput.value;
+  
+    if (!searchInputVal) {
+      console.error('You need a search input value!');
+      return;
+    }
+  
+    getLatNLon(searchInputVal);
+    var searchedCity = document.createElement('button');
+    searchedCity.textContent(searchInputVal);
+    searchedCities.append(searchedCity);
+  }
+
+submitEl.addEventListener('click', handleSearchFormSubmit)
 getLatNLon(city);
