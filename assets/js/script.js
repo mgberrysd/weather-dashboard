@@ -6,7 +6,8 @@ var extendedForcastDiv = document.querySelectorAll('.extended');
 var cardCount = 0;
 var searchInput = document.querySelector('#citySearchField');
 var submitEl = document.querySelector('form');
-var searchedCities = document.querySelector('.searchedCities')
+var searchedCities = document.querySelector('.searchedCities');
+var searchedCitiesEl = [];
 
 // API call for current weather data based on lat and lon
 
@@ -20,7 +21,7 @@ function getCurrentForcast(lattitude, longitude) {
             if (currentDayDiv.firstChild) {
                 currentDayDiv.innerHTML = '';
             }
-            console.log(data)
+            // console.log(data)
             var name = document.createElement('h2');
             name.textContent = data.name + ' (' + dayjs().format('dddd MM/DD/YYYY') + ')';
             var icon = document.createElement('img');
@@ -50,8 +51,8 @@ function getExtendedForcast(lattitude, longitude) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
-            console.log(data.list[0].main)
+            // console.log(data)
+            // console.log(data.list[0].main)
             for (var i = 0; i < data.list.length; i++) {
                 if (data.list[i].dt_txt.substring(11, 13) == 12) {
                     if (extendedForcastDiv[cardCount].firstChild) {
@@ -92,9 +93,9 @@ function getLatNLon(cityName) {
         .then(function (data) {
             lat = data[0].lat;
             lon = data[0].lon;
-            console.log(data);
-            console.log(lat);
-            console.log(lon);
+            // console.log(data);
+            // console.log(lat);
+            // console.log(lon);
             getCurrentForcast(lat, lon);
             getExtendedForcast(lat, lon);
         });
@@ -113,16 +114,38 @@ function handleSearchFormSubmit(event) {
 
     getLatNLon(searchInputVal);
     var searchedCity = document.createElement('button');
+    searchedCity.setAttribute('class', 'btn searched-city')
     searchedCity.setAttribute('data-city', searchInputVal);
     searchedCity.textContent = searchInputVal.toUpperCase();
     searchedCities.append(searchedCity);
+    searchedCitiesEl.push(searchedCity.getAttribute('data-city'));
+    localStorage.setItem("city", JSON.stringify(searchedCitiesEl));
+
 };
 
-searchedCities.addEventListener('click', function(event){
+function onLoad() {
+    var fromLocal = localStorage.getItem("city");
+
+    if (fromLocal !== null) {
+        searchedCitiesEl = JSON.parse(fromLocal);
+        console.log(searchedCitiesEl)
+        for (var i = 0; i < searchedCitiesEl.length; i++) {
+            var searchedCity = document.createElement('button');
+            searchedCity.setAttribute('class', 'btn searched-city')
+            searchedCity.setAttribute('data-city', searchedCitiesEl[i]);
+            searchedCity.textContent = searchedCitiesEl[i].toUpperCase();
+            searchedCities.append(searchedCity);
+        }
+    }
+
+    getLatNLon(city);
+}
+
+searchedCities.addEventListener('click', function (event) {
     var element = event.target;
     getLatNLon(element.getAttribute('data-city'));
 });
 
 submitEl.addEventListener('submit', handleSearchFormSubmit);
 
-getLatNLon(city);
+onLoad();
