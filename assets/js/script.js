@@ -5,7 +5,7 @@ var currentDayDiv = document.querySelector('.current');
 var extendedForcastDiv = document.querySelectorAll('.extended');
 var cardCount = 0;
 var searchInput = document.querySelector('#citySearchField');
-var submitEl = document.querySelector('.btn');
+var submitEl = document.querySelector('form');
 var searchedCities = document.querySelector('.searchedCities')
 
 // API call for current weather data based on lat and lon
@@ -18,7 +18,7 @@ function getCurrentForcast(lattitude, longitude) {
         })
         .then(function (data) {
             if (currentDayDiv.firstChild) {
-               currentDayDiv.innerHTML = '';
+                currentDayDiv.innerHTML = '';
             }
             console.log(data)
             var name = document.createElement('h2');
@@ -36,7 +36,7 @@ function getCurrentForcast(lattitude, longitude) {
             currentDayDiv.append(temp);
             currentDayDiv.append(wind);
             currentDayDiv.append(humidity);
-            
+
 
         });
 };
@@ -53,12 +53,12 @@ function getExtendedForcast(lattitude, longitude) {
             console.log(data)
             console.log(data.list[0].main)
             for (var i = 0; i < data.list.length; i++) {
-                if (data.list[i].dt_txt.substring(11,13) == 12) {
+                if (data.list[i].dt_txt.substring(11, 13) == 12) {
                     if (extendedForcastDiv[cardCount].firstChild) {
                         extendedForcastDiv[cardCount].innerHTML = '';
-                     }
+                    }
                     var date = document.createElement('h2');
-                    date.textContent = dayjs(data.list[i].dt_txt.substring(0,10)).format('dddd MM/DD/YYYY');
+                    date.textContent = dayjs(data.list[i].dt_txt.substring(0, 10)).format('dddd MM/DD/YYYY');
                     var icon = document.createElement('img');
                     icon.setAttribute('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon.replace("n", "d") + '@2x.png');
                     var temp = document.createElement('p');
@@ -103,19 +103,26 @@ function getLatNLon(cityName) {
 
 function handleSearchFormSubmit(event) {
     event.preventDefault();
-  
+
     var searchInputVal = searchInput.value;
-  
+
     if (!searchInputVal) {
-      console.error('You need a search input value!');
-      return;
+        console.error('You need a search input value!');
+        return;
     }
-  
+
     getLatNLon(searchInputVal);
     var searchedCity = document.createElement('button');
-    searchedCity.textContent = searchInputVal;
+    searchedCity.setAttribute('data-city', searchInputVal);
+    searchedCity.textContent = searchInputVal.toUpperCase();
     searchedCities.append(searchedCity);
-  }
+};
 
-submitEl.addEventListener('click', handleSearchFormSubmit)
+searchedCities.addEventListener('click', function(event){
+    var element = event.target;
+    getLatNLon(element.getAttribute('data-city'));
+});
+
+submitEl.addEventListener('submit', handleSearchFormSubmit);
+
 getLatNLon(city);
