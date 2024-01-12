@@ -47,7 +47,8 @@ function getExtendedForcast(lattitude, longitude) {
             console.log(data)
             console.log(data.list[0].main)
             for (var i = 0; i < data.list.length; i++) {
-                if (data.list[i].dt_txt === 12) {
+                console.log(data.list[i].dt_txt.substring(11,13));
+                if (data.list[i].dt_txt.substring(11,13) == 12) {
                     var date = document.createElement('h2');
                     date.textContent = data.list[i].dt_txt;
                     var icon = document.createElement('img');
