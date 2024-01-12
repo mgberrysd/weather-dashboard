@@ -17,6 +17,9 @@ function getCurrentForcast(lattitude, longitude) {
             return response.json();
         })
         .then(function (data) {
+            if (currentDayDiv.firstChild) {
+               currentDayDiv.innerHTML = '';
+            }
             console.log(data)
             var name = document.createElement('h2');
             name.textContent = data.name + ' (' + dayjs().format('dddd MM/DD/YYYY') + ')';
@@ -33,7 +36,7 @@ function getCurrentForcast(lattitude, longitude) {
             currentDayDiv.append(temp);
             currentDayDiv.append(wind);
             currentDayDiv.append(humidity);
-
+            
 
         });
 };
@@ -51,6 +54,9 @@ function getExtendedForcast(lattitude, longitude) {
             console.log(data.list[0].main)
             for (var i = 0; i < data.list.length; i++) {
                 if (data.list[i].dt_txt.substring(11,13) == 12) {
+                    if (extendedForcastDiv[cardCount].firstChild) {
+                        extendedForcastDiv[cardCount].innerHTML = '';
+                     }
                     var date = document.createElement('h2');
                     date.textContent = dayjs(data.list[i].dt_txt.substring(0,10)).format('dddd MM/DD/YYYY');
                     var icon = document.createElement('img');
@@ -107,7 +113,7 @@ function handleSearchFormSubmit(event) {
   
     getLatNLon(searchInputVal);
     var searchedCity = document.createElement('button');
-    searchedCity.textContent(searchInputVal);
+    searchedCity.textContent = searchInputVal;
     searchedCities.append(searchedCity);
   }
 
