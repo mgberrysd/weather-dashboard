@@ -4,7 +4,18 @@ var city = 'San Diego';
 
 // API call for weather data based on lat and lon
 
-function getForcast(lattitude, longitude) {
+function getCurrentForcast(lattitude, longitude) {
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lattitude + '&lon=' + longitude + '&appid=140cad93d85f1bf520591ca17e9aac9e';
+    fetch(requestUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data)
+      });
+  };
+
+function getExtendedForcast(lattitude, longitude) {
     var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + lattitude + '&lon=' + longitude + '&appid=140cad93d85f1bf520591ca17e9aac9e';
     fetch(requestUrl)
       .then(function (response) {
@@ -32,7 +43,8 @@ function getLatNLon(cityName) {
         console.log(data[0].lon);
         console.log(lat);
         console.log(lon);
-        getForcast(lat,lon);
+        getCurrentForcast(lat,lon);
+        getExtendedForcast(lat,lon);
       });
   };
 
