@@ -59,7 +59,7 @@ function getExtendedForcast(lattitude, longitude) {
                         extendedForcastDiv[cardCount].innerHTML = '';
                     }
                     var date = document.createElement('h2');
-                    date.textContent = dayjs(data.list[i].dt_txt.substring(0, 10)).format('dddd MM/DD/YYYY');
+                    date.textContent = dayjs(data.list[i].dt_txt.substring(0, 10)).format('MM/DD/YYYY');
                     var icon = document.createElement('img');
                     icon.setAttribute('src', 'https://openweathermap.org/img/wn/' + data.list[i].weather[0].icon.replace("n", "d") + '@2x.png');
                     var temp = document.createElement('p');
@@ -114,7 +114,7 @@ function handleSearchFormSubmit(event) {
 
     getLatNLon(searchInputVal);
     var searchedCity = document.createElement('button');
-    searchedCity.setAttribute('class', 'btn searched-city')
+    searchedCity.setAttribute('class', 'btn btn-secondary searched-city')
     searchedCity.setAttribute('data-city', searchInputVal);
     searchedCity.textContent = searchInputVal.toUpperCase();
     searchedCities.append(searchedCity);
@@ -131,7 +131,7 @@ function onLoad() {
         console.log(searchedCitiesEl)
         for (var i = 0; i < searchedCitiesEl.length; i++) {
             var searchedCity = document.createElement('button');
-            searchedCity.setAttribute('class', 'btn searched-city')
+            searchedCity.setAttribute('class', 'btn btn-secondary searched-city')
             searchedCity.setAttribute('data-city', searchedCitiesEl[i]);
             searchedCity.textContent = searchedCitiesEl[i].toUpperCase();
             searchedCities.append(searchedCity);

@@ -1,0 +1,13 @@
+header {
+    color: white;
+    background-color: blueviolet;
+}
+
+.extended {
+    background-color: indigo;
+    color: white;
+}
+
+.form-label {
+    font-weight: bold;
+}

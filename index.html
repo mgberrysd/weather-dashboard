@@ -14,51 +14,54 @@
 </head>
 
 <body>
-    <header class="p-5 mb-4 border-5 border-bottom border-dark text-center">
-        <h1 class="display-3">Weather Dashboard</h1>
-        <p id="currentDay" class="lead"></p>
+    <header class="p-5 mb-4 border-5 border-bottom border-dark text-center background-color-blue">
+        <h1 class="display-3 color-white">Weather Dashboard</h1>
     </header>
-    <div class="container-lg px-5">
-        <div class="row time-block">
-            <form>
-                <div class="mb-3">
-                    <label for="citySearchInput" class="form-label">Search Weather by City</label>
-                    <input type="text" class="form-control" id="citySearchField" aria-describedby="citySearch">
-                </div>
-                <button type="submit" class="search btn btn-primary">Submit</button>
-            </form>
-            <div class="searchedCities"></div>
-            <div class="card" style="width: 18rem;">
+    <div class="'container mb-3 ms-3">
+        <div class="row">
+            <div class="row col-2 justify-content-center">
+                <form>
+                    <div class="mb-3">
+                        <label for="citySearchInput" class="form-label">Search Weather by City</label>
+                        <input type="text" class="form-control" id="citySearchField" aria-describedby="citySearch">
+                    </div>
+                    <button type="submit" class="search btn btn-primary">Submit</button>
+                </form>
+                <div class="row searchedCities align-items-start"></div>
+            </div>
+            <div class="card col-6">
                 <div class="current card-body">
 
                 </div>
             </div>
         </div>
-        <div class="row time-block">
-            <div class="card col-2">
-                <div class="extended card-body">
+    </div>
 
-                </div>
+    <div class="row time-block offset-2">
+        <h2>5-Day Forecast</h2>
+        <div class="card col-2">
+            <div class="extended card-body">
+
             </div>
-            <div class="card col-2">
-                <div class="extended card-body">
+        </div>
+        <div class="card col-2">
+            <div class="extended card-body">
 
-                </div>
             </div>
-            <div class="card col-2">
-                <div class="extended card-body">
+        </div>
+        <div class="card col-2">
+            <div class="extended card-body">
 
-                </div>
             </div>
-            <div class="card col-2">
-                <div class="extended card-body">
+        </div>
+        <div class="card col-2">
+            <div class="extended card-body">
 
-                </div>
             </div>
-            <div class="card col-2">
-                <div class="extended card-body">
+        </div>
+        <div class="card col-2">
+            <div class="extended card-body">
 
-                </div>
             </div>
         </div>
     </div>
