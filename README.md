@@ -2,19 +2,20 @@
 
 ## Description
 
-This project aimed to create a work day scheduler using JavaScript. The project provided the user with an hourly breakdown of the day (9 am - 5 pm) where they could enter tasks for each hour and save them for future reference. The page also displayed the date for that day and a color coded hourly breakdown that highlighted past, present, and future hours.
+This project aimed to create a weather dashboard using a third party API. The project provided the user a current forecast and 5-day forecast for San Diego when the page loads. The user could also search for different cities and the page would update with data for those cities instead. Searched cities would appear on the page as buttons and when clicked would display weather data for that city.
 
-
-This project highlighted the use of third party apis to dynamicly display information on the page, in this case day.JS. day.JS was used to display the date at the top of the page as well as provide the hour reference from which the hourly user input boxes were then color coded. Local storage was once again used to save user input when the save button was pressed and be displayed on the page following refreshes. Finally DOM traversal was used to select the text input to be saved to local storage when a save button was pressed.
+This project highlighted the use of a third party api to dynamicly display weather information on the page. The project used 3 different OpenWeather API calls to get the lattitude and longitude of a searched city, the current weather data for that city, and the 5-day forecast for that city. Local storage was used to save searched cities when the submit button was pressed and display the city buttons on the page following refreshes. day.JS was used again to parse date information into the desired format.
 
 ## Usage
 
-A deployed version of the project can be found at https://mgberrysd.github.io/work-day-scheduler/
+A deployed version of the project can be found at https://mgberrysd.github.io/weather-dashboard/
 
 When loaded the page should appear as:
 
-![Work day scheduler page deployed via github pages](assets/images/workdayexample.png)
+![Weather dashboard page deployed via github pages](assets/images/weather-dashboard.png)
 
 ## Credits
 
-The JS for the workday scheduler was created by Michael Berry.
+The HTML, CSS, and JS for the weather dashboard was created by Michael Berry.
+
+The project used the OpenWeather API for weather data.
